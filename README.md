@@ -1,7 +1,8 @@
-# CMake-template
-Template CMake configuration for C/C++ projects
+# randcrypt
+encryption/decryption library that uses random algorithms
 
 ## Build Instructions
+build instructions may differ in the future releases
 
 ### Requirements
 
@@ -15,7 +16,7 @@ Remember to rename project and subproject directories and their references in CM
 ```bash
 $ mkdir bin
 $ mkdir build && cd build
-$ -DCMAKE_BUILD_TYPE=Debug ../
+$ cmake -DCMAKE_BUILD_TYPE=Debug ../
 $ make
 $ make install
 $ cd..
