@@ -15,6 +15,9 @@ set(t_DIR ${ROOT_DIR}/t)
 # Set alias for source directory
 set(src_DIR ${ROOT_DIR}/src)
 
+# Set alias for dependecies directory
+set(DEP_DIR ${ROOT_DIR}/dependencies)
+
 # Using modified CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${randcrypt_SOURCE_DIR}/cmake")
 
@@ -62,7 +65,7 @@ file(GLOB_RECURSE src_CPP ${src_DIR}/*.cpp ${src_DIR}/*.c)
 # file(GLOB_RECURSE DEP_LIBS ${DEP_DIR}/*.dylib)
 
 # Look for all include paths in dependencies and subprojects and include them
-make_include_directories_list(${src_DIR} ${t_DIR})
+make_include_directories_list(${src_DIR} ${t_DIR} ${DEP_DIR})
 include_directories(${INCLUDE_LIST})
 
 # Look in the subdirectories to find its CMakeLists.txt so we can build the executable
