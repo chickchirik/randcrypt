@@ -1,20 +1,20 @@
 # CMake configuraton for the subproject is defined here
 
-project(SUBPROJECT)
+project(t)
 
 add_executable(
-	SUBPROJECT
-	${SUBPROJECT_CPP}
+	t
+	${t_CPP}
 )
 
 # Link external libratires
 # target_link_libraries(
-# 	SUBPROJECT
+# 	t
 #	${DEP_LIBS}
 #	${Boost_LIBRARIES}
 # )
 
-install(TARGETS SUBPROJECT RUNTIME DESTINATION ${BIN_DIR})
+install(TARGETS t RUNTIME DESTINATION ${BIN_DIR})
 
 # include_directories(
 #	${INCLUDE_LIST}
