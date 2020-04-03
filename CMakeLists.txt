@@ -10,7 +10,7 @@ set(ROOT_DIR "${randcrypt_SOURCE_DIR}")
 set(BIN_DIR ${randcrypt_SOURCE_DIR}/bin)
 
 # Set alias for subproject directory
-set(SUBPROJECT_DIR ${ROOT_DIR}/SUBPROJECT)
+set(t_DIR ${ROOT_DIR}/t)
 
 # Using modified CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${randcrypt_SOURCE_DIR}/cmake")
@@ -55,14 +55,14 @@ function(make_include_directories_list)
 endfunction()
 
 # Look for all source files in subproject and save them
-file(GLOB_RECURSE SUBPROJECT_CPP ${SUBPROJECT_DIR}/*.cpp ${SUBPROJECT_DIR}/*.c)
+file(GLOB_RECURSE t_CPP ${t_DIR}/*.cpp ${t_DIR}/*.c)
 
 # Look for all dynamic libraries in dependencies and save them in the list
 # file(GLOB_RECURSE DEP_LIBS ${DEP_DIR}/*.dylib)
 
 # Look for all include paths in dependencies and subprojects and include them
-# make_include_directories_list(${SUBPROJECT_DIR})
+# make_include_directories_list(${t_DIR})
 # include_directories(${INCLUDE_LIST})
 
 # Look in the subdirectories to find its CMakeLists.txt so we can build the executable
-add_subdirectory(SUBPROJECT)
+add_subdirectory(t)
