@@ -9,8 +9,11 @@ set(ROOT_DIR "${randcrypt_SOURCE_DIR}")
 # Set an output directory for our binaries
 set(BIN_DIR ${randcrypt_SOURCE_DIR}/bin)
 
-# Set alias for subproject directory
+# Set alias for tests directory
 set(t_DIR ${ROOT_DIR}/t)
+
+# Set alias for source directory
+set(src_DIR ${ROOT_DIR}/src)
 
 # Using modified CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${randcrypt_SOURCE_DIR}/cmake")
@@ -27,11 +30,6 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
     endif()
 endif()
-
-# Look up Boost C++ Libraries
-# find_package(Boost REQUIRED)
-# include_directories(${Boost_INCLUDE_DIR})
-# link_directories(${Boost_LIBRARY_DIR})
 
 # Function recursively iterates through provided directories and creates a
 # global INCLUDE_LIST variable string.
@@ -57,12 +55,15 @@ endfunction()
 # Look for all source files in subproject and save them
 file(GLOB_RECURSE t_CPP ${t_DIR}/*.cpp ${t_DIR}/*.c)
 
+# Look for all source files in src and save them
+file(GLOB_RECURSE src_CPP ${src_DIR}/*.cpp ${src_DIR}/*.c)
+
 # Look for all dynamic libraries in dependencies and save them in the list
 # file(GLOB_RECURSE DEP_LIBS ${DEP_DIR}/*.dylib)
 
 # Look for all include paths in dependencies and subprojects and include them
-# make_include_directories_list(${t_DIR})
-# include_directories(${INCLUDE_LIST})
+make_include_directories_list(${src_DIR} ${t_DIR})
+include_directories(${INCLUDE_LIST})
 
 # Look in the subdirectories to find its CMakeLists.txt so we can build the executable
 add_subdirectory(t)
