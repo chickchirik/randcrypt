@@ -1,19 +1,19 @@
 # CMake configuraton for the whole project is defined here
 
 cmake_minimum_required(VERSION 2.6)
-project(PROJECT)
+project(randcrypt)
 
 # Set root directory alias
-set(ROOT_DIR "${PROJECT_SOURCE_DIR}")
+set(ROOT_DIR "${randcrypt_SOURCE_DIR}")
 
 # Set an output directory for our binaries
-set(BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
+set(BIN_DIR ${randcrypt_SOURCE_DIR}/bin)
 
 # Set alias for subproject directory
 set(SUBPROJECT_DIR ${ROOT_DIR}/SUBPROJECT)
 
 # Using modified CMake modules
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${randcrypt_SOURCE_DIR}/cmake")
 
 # Set compilation flags based on compiler
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
