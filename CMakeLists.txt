@@ -21,6 +21,10 @@ set(DEP_DIR ${ROOT_DIR}/dependencies)
 # Using modified CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${randcrypt_SOURCE_DIR}/cmake")
 
+# add conan configuration
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 # Set compilation flags based on compiler
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -std=c++14" )
@@ -66,7 +70,8 @@ file(GLOB_RECURSE src_CPP ${src_DIR}/*.cpp ${src_DIR}/*.c)
 
 # Look for all include paths in dependencies and subprojects and include them
 make_include_directories_list(${src_DIR} ${t_DIR} ${DEP_DIR})
-include_directories(${INCLUDE_LIST})
+include_directories(${INCLUDE_LIST} ${CONAN_INCLUDE_DIRS})
+message(JOPA ${CONAN_INCLUDE_DIRS})
 
 # Look in the subdirectories to find its CMakeLists.txt so we can build the executable
 add_subdirectory(t)

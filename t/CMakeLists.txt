@@ -8,4 +8,6 @@ add_executable(
 	${src_CPP}
 )
 
+target_link_libraries(t ${CONAN_LIBS})
+
 install(TARGETS t RUNTIME DESTINATION ${BIN_DIR})
