@@ -9,3 +9,5 @@
     that uses random algorithms.
 
 */
+#include "cryptopp/cryptlib.h"
+#include "cryptopp/sha.h"
