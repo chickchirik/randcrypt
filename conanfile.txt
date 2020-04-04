@@ -1,0 +1,5 @@
+[requires]
+cryptopp/8.2.0@bincrafters/stable
+
+[generators]
+cmake
