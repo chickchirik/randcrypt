@@ -1,39 +1,45 @@
 # randcrypt
 encryption/decryption library that uses random algorithms
 
-## Build Instructions
-build instructions may differ in the future releases
+## build Instructions
 
-### Requirements
+### requirements
 
 - [git](https://git-scm.com/)
 - [cmake](https://cmake.org/)
+- [conan](https://conan.io/)
 - [gcc](https://www.gnu.org/software/gcc/) or [clang](https://clang.llvm.org/) or [msvc](https://visualstudio.microsoft.com/)
 
-### Building
-Remember to rename project and subproject directories and their references in CMakeLists configurations.
+### building
 
+downloading dependencies via conan:
+```bash
+$ mkdir build; cd build
+$ conan install ..
+$ cd ..
+```
+
+building the project via CMake:
 ```bash
 $ mkdir bin
-$ mkdir build && cd build
-$ cmake -DCMAKE_BUILD_TYPE=Debug ../
+$ cd build
+$ cmake -G="Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../
 $ make
 $ make install
-$ cd..
+$ cd ..
 ```
-or
+
+### running
+
+run the tests:
 ```bash
-$ mkdir bin; mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=Debug ../; make ;make install; cd..
+$ ./bin/t
 ```
 
-### Running
+### links
 
-```bash
-$ ./bin/SUBPROJECT
-```
-
-### Links
-
+- Crypto++: https://cryptopp.com/
 - CMake: https://cmake.org/
 - CMake documentation: https://cmake.org/documentation/
 - CMake FAQ: https://gitlab.kitware.com/cmake/community/wikis/FAQ
+- Conan introduction: https://docs.conan.io/en/latest/getting_started.html
