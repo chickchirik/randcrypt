@@ -9,7 +9,7 @@
 
 */
 
-#include "Catch2.hpp"
+#include "catch2/catch.hpp"
 #include "randcrypt.hpp"
 
 TEST_CASE("randcrypt tests", "[randcrypt]") {

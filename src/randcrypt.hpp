@@ -11,3 +11,10 @@
 */
 #include "cryptopp/cryptlib.h"
 #include "cryptopp/sha.h"
+
+
+/**/
+
+namespace randcrypt {
+
+}
