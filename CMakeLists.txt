@@ -71,7 +71,6 @@ file(GLOB_RECURSE src_CPP ${src_DIR}/*.cpp ${src_DIR}/*.c)
 # Look for all include paths in dependencies and subprojects and include them
 make_include_directories_list(${src_DIR} ${t_DIR})
 include_directories(${INCLUDE_LIST} ${CONAN_INCLUDE_DIRS})
-message(JOPA ${CONAN_INCLUDE_DIRS})
 
 # Look in the subdirectories to find its CMakeLists.txt so we can build the executable
 add_subdirectory(t)
