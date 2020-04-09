@@ -42,8 +42,8 @@ namespace {
         int seriesLen = lenDistr(generator);
         for (int algoNum = 1; algoNum != seriesLen; ++algoNum) {
             int algoID = algoIdDistr(generator);
-            AlgorithmInfo currAlgo = algorithms[algoId];
-            currAlgo.id = algoId;
+            AlgorithmInfo currAlgo = algorithms[algoID];
+            currAlgo.id = algoID;
             algoSeries.push_back(currAlgo);
         }
         return algoSeries;
