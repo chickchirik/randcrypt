@@ -12,6 +12,7 @@
 #include "randcrypt.hpp"
 
 namespace {
+    #define ALGO_COUNT 1
     using std::string;
 
     struct AlgorithmInfo {
@@ -24,6 +25,8 @@ namespace {
         string iv  = "";
         int algID  =  0;
     };
+
+    const AlgorithmInfo algorithms[ALGO_COUNT];
 }
 
 namespace randcrypt {
