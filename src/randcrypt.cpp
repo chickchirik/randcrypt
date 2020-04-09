@@ -13,7 +13,12 @@
 
 namespace {
     #define ALGO_COUNT 1
+    template <typename IntT>
+    using UIDistr = std::uniform_int_distribution<IntT>;
+    using RanDev = std::random_device;
+    using RanGen = std::mt19937;
     using std::string;
+    using std::vector;
 
     struct AlgorithmInfo {
         std::function<char*(char* fileptahIn, char* filepathOut)> encodeFile;
@@ -27,6 +32,21 @@ namespace {
     };
 
     const AlgorithmInfo algorithms[ALGO_COUNT];
+
+    std::vector<AlgorithmInfo> formAlgoSeries() {
+        vector<AlgorithmInfo> algoSeries;
+        UIDistr<int> algoIdDistr(0, ALGO_COUNT);
+        UIDistr<int> lenDistr(1, ALGO_COUNT);
+        RanDev randomDevice;
+        RanGen generator(randomDevice());
+        int seriesLen = lenDistr(generator);
+        for (int algoNum = 1; algoNum != seriesLen; ++algoNum) {
+            int algoId = algoIdDistr(generator);
+            AlgorithmInfo currAlgo = algorithms[algoId];
+            algoSeries.push_back(currAlgo);
+        }
+        return algoSeries;
+    }
 }
 
 namespace randcrypt {

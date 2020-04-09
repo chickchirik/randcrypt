@@ -13,6 +13,7 @@
 #include "cryptopp/sha.h"
 #include <functional>
 #include <string>
+#include <random>
 
 /**/
 
