@@ -11,6 +11,21 @@
 */
 #include "randcrypt.hpp"
 
+namespace {
+    using std::string;
+
+    struct AlgorithmInfo {
+        std::function<char*(char* fileptahIn, char* filepathOut)> encodeFile;
+        std::function<char*(char* data)> encodeData;
+        std::function<void(char* fileptahIn, char* algoSeries)> decodeFile;
+        std::function<char*(char* algoSeries)> decodeData;
+        string algName = "";
+        string key = "";
+        string iv  = "";
+        int algID  =  0;
+    };
+}
+
 namespace randcrypt {
     char* encode(char* filepathIn, char* filepathOut) {}
     char* encode(char* data) {}

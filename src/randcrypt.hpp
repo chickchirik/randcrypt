@@ -11,7 +11,8 @@
 */
 #include "cryptopp/cryptlib.h"
 #include "cryptopp/sha.h"
-
+#include <functional>
+#include <string>
 
 /**/
 
