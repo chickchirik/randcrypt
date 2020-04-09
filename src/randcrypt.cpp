@@ -25,10 +25,10 @@ namespace {
         std::function<char*(char* data)> encodeData;
         std::function<void(char* fileptahIn, char* algoSeries)> decodeFile;
         std::function<char*(char* algoSeries)> decodeData;
-        string algName = "";
+        string algoName = "";
         string key = "";
         string iv  = "";
-        int algID  =  0;
+        int algoID  =  0;
     };
 
     const AlgorithmInfo algorithms[ALGO_COUNT];
@@ -41,7 +41,7 @@ namespace {
         RanGen generator(randomDevice());
         int seriesLen = lenDistr(generator);
         for (int algoNum = 1; algoNum != seriesLen; ++algoNum) {
-            int algoId = algoIdDistr(generator);
+            int algoID = algoIdDistr(generator);
             AlgorithmInfo currAlgo = algorithms[algoId];
             algoSeries.push_back(currAlgo);
         }
