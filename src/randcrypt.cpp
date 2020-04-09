@@ -29,6 +29,17 @@ namespace {
         string key  = "";
         string iv   = "";
         int id      =  0;
+
+        AlgorithmInfo() {} //temporary empty constructor, will be prohibited later
+        AlgorithmInfo(
+            std::function<char*(char* fileptahIn, char* filepathOut)> encodeF,
+            std::function<char*(char* data)> encodeD,
+            std::function<void(char* fileptahIn, char* algoSeries)> decodeF,
+            std::function<char*(char* algoSeries)> decodeD,
+            char* algoName
+        ) : encodeFile(encodeF), encodeData(encodeD),
+            decodeFile(decodeF), decodeData(decodeD),
+            name(algoName) {}
     };
 
     const AlgorithmInfo algorithms[ALGO_COUNT];
