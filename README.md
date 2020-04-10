@@ -38,8 +38,7 @@ $ ./bin/t
 
 ### links
 
-- Crypto++: https://cryptopp.com/
-- CMake: https://cmake.org/
-- CMake documentation: https://cmake.org/documentation/
-- CMake FAQ: https://gitlab.kitware.com/cmake/community/wikis/FAQ
-- Conan introduction: https://docs.conan.io/en/latest/getting_started.html
+- Nlohmann::JSON: https://cryptopp.com/
+- Crypto++:       https://cryptopp.com/
+- Conan:          https://conan.io/
+- CMake:          https://cmake.org/
