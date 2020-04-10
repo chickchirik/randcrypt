@@ -1,16 +1,11 @@
-/*
-
-    randcrypt.cpp
-
-    Created by <chickchirik> on 09/04/2019.
-
-    DESCRIPTION:
-    randcrypt is an ecryption/decryption software
-    that uses random algorithms.
-
+/* 
+ * randcrypt.cpp
+ * Created by <chickchirik> on 09/04/2019.
+ * See the description in randcrypt.hpp
 */
 #include "randcrypt.hpp"
 
+/* unknown namespace for static-like linker visibility reduction behaviour */
 namespace {
     #define ALGO_COUNT 1
     template <typename IntT>
@@ -21,6 +16,12 @@ namespace {
     using std::vector;
 
     struct AlgorithmInfo {
+        /* AlgorithmInfo data structure holds the information about
+         * encryption algorithm, such as:
+         *  encryption/decryption callbacks,
+         *  name, key, iv, 
+         *  id(tmp solution for inner-indexing, thinking about better one)
+         */
         std::function<char*(char* fileptahIn, char* filepathOut)> encodeFile;
         std::function<char*(char* data)> encodeData;
         std::function<void(char* fileptahIn, char* algoSeries)> decodeFile;
@@ -42,9 +43,14 @@ namespace {
             name(algoName) {}
     };
 
+    /* algorithm-info lookup table */
     const AlgorithmInfo algorithms[ALGO_COUNT];
 
     std::vector<AlgorithmInfo> formAlgoSeries() {
+        /* creates an arbitary sequence of
+         * encryption algorithms with at least
+         * one algorithm included
+         */
         vector<AlgorithmInfo> algoSeries;
         UIDistr<int> algoIdDistr(0, ALGO_COUNT);
         UIDistr<int> lenDistr(1, ALGO_COUNT);
