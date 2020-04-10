@@ -1,6 +1,7 @@
 [requires]
 cryptopp/8.2.0@bincrafters/stable
 catch2/2.11.3
+nlohmann_json/3.7.3
 
 [generators]
 cmake
