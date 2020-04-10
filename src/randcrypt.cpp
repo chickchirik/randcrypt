@@ -14,7 +14,8 @@ namespace {
     using RanGen = std::mt19937;
     using std::string;
     using std::vector;
-
+    using nlohmann::json;
+ 
     struct AlgorithmInfo {
         /* AlgorithmInfo data structure holds the information about
          * encryption algorithm, such as:
@@ -68,8 +69,8 @@ namespace {
 }
 
 namespace randcrypt {
-    char* encode(char* filepathIn, char* filepathOut) {}
-    char* encode(char* data) {}
-    void  decode(char* filepathIn, char* filepathOut, char* algoSeriesHash) {}
-    char* decode(char* algoSeriesHash) {}
+    void encode(char* filepathIn, char* filepathOut, char* encodedDataInfo) {}
+    void encode(char* data, char* encodedData) {}
+    void decode(char* filepathIn, char* filepathOut, char* encodedDataInfo) {}
+    void decode(char* encodedData, char* decodedData) {}
 }

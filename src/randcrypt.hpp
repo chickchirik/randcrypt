@@ -18,10 +18,11 @@
 #include <functional>           /* std::function */
 #include <string>               /* std::string   */
 #include <random>               /* std::uniform_int_distribution; std::mersenne_twister_generator; */
+#include "nlohmann/json.hpp"    /* nlohmann::json*/
 
 namespace randcrypt {
-    char* encode(char* filepathIn, char* filepathOut);
-    char* encode(char* data);
-    void  decode(char* filepathIn, char* filepathOut, char* algoSeriesHash);
-    char* decode(char* algoSeriesHash);
+    void encode(char* filepathIn, char* filepathOut, char* encodedDataInfo);
+    void encode(char* data, char* encodedData);
+    void decode(char* filepathIn, char* filepathOut, char* encodedDataInfo);
+    void decode(char* encodedData, char* decodedData);
 }
