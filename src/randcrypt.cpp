@@ -1,4 +1,4 @@
-/* 
+/*
  * randcrypt.cpp
  * Created by <chickchirik> on 09/04/2019.
  * See the description in randcrypt.hpp
@@ -15,12 +15,12 @@ namespace {
     using std::string;
     using std::vector;
     using nlohmann::json;
- 
+
     struct AlgorithmInfo {
         /* AlgorithmInfo data structure holds the information about
          * encryption algorithm, such as:
          *  encryption/decryption callbacks,
-         *  name, key, iv, 
+         *  name, key, iv,
          *  id(tmp solution for inner-indexing, thinking about better one)
          */
         std::function<char*(char* fileptahIn, char* filepathOut)> encodeFile;
@@ -47,7 +47,7 @@ namespace {
     /* algorithm-info lookup table */
     const AlgorithmInfo algorithms[ALGO_COUNT];
 
-    std::vector<AlgorithmInfo> formAlgoSeries() {
+    vector<AlgorithmInfo> formAlgoSeries() {
         /* creates an arbitary sequence of
          * encryption algorithms with at least
          * one algorithm included
