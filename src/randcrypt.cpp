@@ -42,6 +42,16 @@ namespace {
         ) : encodeFile(encodeF), encodeData(encodeD),
             decodeFile(decodeF), decodeData(decodeD),
             name(algoName) {}
+
+        /* returns a json, containing struct data */
+        json toJSON() const {
+            json result;
+            result["name"] = name;
+            result["key"]  = key;
+            result["iv"]   = iv;
+            result["id"]   = id;
+            return result;
+        }
     };
 
     /* algorithm-info lookup table */
