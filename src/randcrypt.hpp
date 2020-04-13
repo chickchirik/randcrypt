@@ -13,6 +13,7 @@
  *      decode (for files and for raw data) - decodes the information
  *      back based on a hash returned from previous function.
 */
+#pragma once
 #include "cryptopp/cryptlib.h"
 #include "cryptopp/sha.h"
 #include <functional>           /* std::function */
