@@ -76,6 +76,15 @@ namespace {
         }
         return algoSeries;
     }
+
+    json convertToJSON(vector<AlgorithmInfo> algos) {
+        /* converts algoseries to json */
+        json result;
+        for (const auto& algo : algos) {
+            result["series"] += algo.toJSON();
+        }
+        return result;
+    }
 }
 
 namespace randcrypt {
