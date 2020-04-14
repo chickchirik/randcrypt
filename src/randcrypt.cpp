@@ -25,7 +25,7 @@ namespace {
          */
         std::function<string(string fileptahIn, string filepathOut)> encodeFile;
         std::function<string(string data)> encodeData;
-        std::function<string(string fileptahIn, string algoSeries)> decodeFile;
+        std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeFile;
         std::function<string(string algoSeries)> decodeData;
         string name = "";
         string key  = "";
@@ -36,8 +36,8 @@ namespace {
         AlgorithmInfo(
             std::function<string(string fileptahIn, string filepathOut)> encodeF,
             std::function<string(string data)> encodeD,
-            std::function<string(string fileptahIn, string algoSeries)> decodeF,
-            std::function<string(string algoSeries)> decodeD,
+            std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeF,
+            std::function<string(string data)> decodeD,
             string algoName
         ) : encodeFile(encodeF), encodeData(encodeD),
             decodeFile(decodeF), decodeData(decodeD),
@@ -90,6 +90,6 @@ namespace {
 namespace randcrypt {
     std::string encode(std::string filepathIn, std::string filepathOut) {}
     std::string encode(std::string data) {}
-    std::string decode(std::string filepathIn, std::string filepathOut) {}
+    std::string decode(std::string filepathIn, std::string filepathOut, std::string decodeInfo) {}
     std::string decode(std::string data) {}
 }

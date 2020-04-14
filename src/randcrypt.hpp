@@ -24,6 +24,6 @@
 namespace randcrypt {
     std::string encode(std::string filepathIn, std::string filepathOut);
     std::string encode(std::string data);
-    std::string decode(std::string filepathIn, std::string filepathOut);
+    std::string decode(std::string filepathIn, std::string filepathOut, std::string decodeInfo);
     std::string decode(std::string data);
 }
