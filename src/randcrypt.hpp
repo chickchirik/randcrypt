@@ -22,8 +22,8 @@
 #include "nlohmann/json.hpp"    /* nlohmann::json*/
 
 namespace randcrypt {
-    void encode(char* filepathIn, char* filepathOut, char* encodedDataInfo);
-    void encode(char* data, char* encodedData);
-    void decode(char* filepathIn, char* filepathOut, char* encodedDataInfo);
-    void decode(char* encodedData, char* decodedData);
+    std::string encode(std::string filepathIn, std::string filepathOut);
+    std::string encode(std::string data);
+    std::string decode(std::string filepathIn, std::string filepathOut);
+    std::string decode(std::string data);
 }

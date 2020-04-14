@@ -23,10 +23,10 @@ namespace {
          *  name, key, iv,
          *  id(tmp solution for inner-indexing, thinking about better one)
          */
-        std::function<char*(char* fileptahIn, char* filepathOut)> encodeFile;
-        std::function<char*(char* data)> encodeData;
-        std::function<void(char* fileptahIn, char* algoSeries)> decodeFile;
-        std::function<char*(char* algoSeries)> decodeData;
+        std::function<string(string fileptahIn, string filepathOut)> encodeFile;
+        std::function<string(string data)> encodeData;
+        std::function<string(string fileptahIn, string algoSeries)> decodeFile;
+        std::function<string(string algoSeries)> decodeData;
         string name = "";
         string key  = "";
         string iv   = "";
@@ -34,11 +34,11 @@ namespace {
 
         AlgorithmInfo() {} //temporary empty constructor, will be prohibited later
         AlgorithmInfo(
-            std::function<char*(char* fileptahIn, char* filepathOut)> encodeF,
-            std::function<char*(char* data)> encodeD,
-            std::function<void(char* fileptahIn, char* algoSeries)> decodeF,
-            std::function<char*(char* algoSeries)> decodeD,
-            char* algoName
+            std::function<string(string fileptahIn, string filepathOut)> encodeF,
+            std::function<string(string data)> encodeD,
+            std::function<string(string fileptahIn, string algoSeries)> decodeF,
+            std::function<string(string algoSeries)> decodeD,
+            string algoName
         ) : encodeFile(encodeF), encodeData(encodeD),
             decodeFile(decodeF), decodeData(decodeD),
             name(algoName) {}
@@ -88,8 +88,8 @@ namespace {
 }
 
 namespace randcrypt {
-    void encode(char* filepathIn, char* filepathOut, char* encodedDataInfo) {}
-    void encode(char* data, char* encodedData) {}
-    void decode(char* filepathIn, char* filepathOut, char* encodedDataInfo) {}
-    void decode(char* encodedData, char* decodedData) {}
+    std::string encode(std::string filepathIn, std::string filepathOut) {}
+    std::string encode(std::string data) {}
+    std::string decode(std::string filepathIn, std::string filepathOut) {}
+    std::string decode(std::string data) {}
 }
