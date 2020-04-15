@@ -7,7 +7,6 @@
 
 /* unknown namespace for static-like linker visibility reduction behaviour */
 namespace {
-    #define ALGO_COUNT 1
     template <typename IntT>
     using UIDistr = std::uniform_int_distribution<IntT>;
     using RanDev = std::random_device;
@@ -50,7 +49,7 @@ namespace {
     };
 
     /* algorithm-info lookup table */
-    const AlgorithmInfo* algorithms[ALGO_COUNT];
+    const vector<AlgorithmInfo*> algorithms;
 
     vector<AlgorithmInfo*> formAlgoSeries() {
         /* creates an arbitary sequence of
