@@ -27,6 +27,7 @@ namespace {
         std::function<string(string data)> encodeData;
         std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeFile;
         std::function<string(string algoSeries)> decodeData;
+        std::function<void()> genKeyWithIV;
         string name = "";
         CryptoPP::SecByteBlock key;
         CryptoPP::SecByteBlock iv;
@@ -38,6 +39,7 @@ namespace {
             std::function<string(string data)> encodeD,
             std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeF,
             std::function<string(string data)> decodeD,
+            std::function<void()> genKeyWithIV,
             string algoName
         ) : encodeFile(encodeF), encodeData(encodeD),
             decodeFile(decodeF), decodeData(decodeD),
@@ -72,6 +74,7 @@ namespace {
             int algoID = algoIdDistr(generator);
             AlgorithmInfo currAlgo = algorithms[algoID];
             currAlgo.id = algoID;
+            currAlgo.genKeyWithIV();
             algoSeries.push_back(currAlgo);
         }
         return algoSeries;
