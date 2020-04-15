@@ -44,7 +44,7 @@ namespace {
             name(algoName) {}
 
         /* returns a json, containing struct data */
-        json toJSON() const {
+        operator json () const {
             json result;
             result["name"] = name;
             result["key"]  = key;
@@ -81,7 +81,7 @@ namespace {
         /* converts algoseries to json */
         json result;
         for (const auto& algo : algos) {
-            result["series"] += algo.toJSON();
+            result["series"] += algo;
         }
         return result;
     }
