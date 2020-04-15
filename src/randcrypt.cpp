@@ -16,39 +16,23 @@ namespace {
     using std::vector;
     using nlohmann::json;
 
-    struct AlgorithmInfo {
-        /* AlgorithmInfo data structure holds the information about
-         * encryption algorithm, such as:
-         *  encryption/decryption callbacks,
-         *  name, key, iv,
-         *  id(tmp solution for inner-indexing, thinking about better one)
-         */
-        std::function<string(const string& fileptahIn, const string& filepathOut)> encodeFile;
-        std::function<string(const string& data)> encodeData;
-        std::function<string(const string& fileptahIn, const string& filepathOut, const string& decodeInfo)> decodeFile;
-        std::function<string(const string& algoSeries)> decodeData;
-        std::function<void()> genKeyWithIV;
-        string name = "";
+    class AlgorithmInfo {
+    protected:
         CryptoPP::SecByteBlock key;
         CryptoPP::SecByteBlock iv;
-        int id      =  0;
-
+        int id =  0;
+    public:
         AlgorithmInfo() {} //temporary empty constructor, will be prohibited later
-        AlgorithmInfo(
-            std::function<string(const string& fileptahIn, const string& filepathOut)> encodeF,
-            std::function<string(const string& data)> encodeD,
-            std::function<string(const string& fileptahIn, const string& filepathOut, const string& decodeInfo)> decodeF,
-            std::function<string(const string& data)> decodeD,
-            std::function<void()> genKeyWithIV,
-            string algoName
-        ) : encodeFile(encodeF), encodeData(encodeD),
-            decodeFile(decodeF), decodeData(decodeD),
-            name(algoName) {}
+
+        virtual string encode(const string& data) = 0;
+        virtual string decode(const string& algoSeries) = 0;
+        virtual string encode(const string& fileptahIn, const string& filepathOut) = 0;
+        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) = 0;
+        virtual void   genKeyWithIV() = 0;
 
         /* returns a json, containing struct data */
         operator json () const {
             json result;
-            result["name"] = name;
             result["key"]  = std::string(reinterpret_cast<const char*>(&key[0]), key.size());
             result["iv"]   = std::string(reinterpret_cast<const char*>(&iv[0]), iv.size());
             result["id"]   = id;
@@ -56,43 +40,52 @@ namespace {
         }
     };
 
-    /* algorithm-info lookup table */
-    const AlgorithmInfo algorithms[ALGO_COUNT];
+    class AESInfo : AlgorithmInfo {
+    public:
+        virtual string encode(const string& data) override {}
+        virtual string decode(const string& algoSeries) override {}
+        virtual string encode(const string& fileptahIn, const string& filepathOut) override {}
+        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) override {}
+        virtual void   genKeyWithIV() override {}
+    };
 
-    vector<AlgorithmInfo> formAlgoSeries() {
+    /* algorithm-info lookup table */
+    const AlgorithmInfo* algorithms[ALGO_COUNT];
+
+    vector<AlgorithmInfo*> formAlgoSeries() {
         /* creates an arbitary sequence of
          * encryption algorithms with at least
          * one algorithm included
          */
-        vector<AlgorithmInfo> algoSeries;
-        UIDistr<int> algoIdDistr(0, ALGO_COUNT);
-        UIDistr<int> lenDistr(1, ALGO_COUNT);
+        vector<AlgorithmInfo*> algoSeries;
+        UIDistr<int> algoIdDistr(0, algorithms.size());
+        UIDistr<int> lenDistr(1, algorithms.size());
         RanDev randomDevice;
         RanGen generator(randomDevice());
         int seriesLen = lenDistr(generator);
         for (int algoNum = 1; algoNum != seriesLen; ++algoNum) {
             int algoID = algoIdDistr(generator);
-            AlgorithmInfo currAlgo = algorithms[algoID];
-            currAlgo.id = algoID;
-            currAlgo.genKeyWithIV();
+            AlgorithmInfo* currAlgo = algorithms[algoID];
+            //currAlgo.id = algoID;
+            currAlgo->genKeyWithIV();
             algoSeries.push_back(currAlgo);
         }
         return algoSeries;
     }
 
-    json convertToJSON(vector<AlgorithmInfo> algos) {
+    json convertToJSON(vector<AlgorithmInfo*> algos) {
         /* converts algoseries to json */
         json result;
-        for (const auto& algo : algos) {
-            result["series"] += algo;
+        for (const auto* algo : algos) {
+            result["series"] += *algo;
         }
         return result;
     }
 }
 
 namespace randcrypt {
-    std::string encode(const std::string& filepathIn, const std::string& filepathOut) {}
-    std::string encode(const std::string& data) {}
-    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo) {}
-    std::string decode(const std::string& data) {}
+    std::string encode(const std::string& filepathIn, const std::string& filepathOut) { return ""; }
+    std::string encode(const std::string& data) { return ""; }
+    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo) { return ""; }
+    std::string decode(const std::string& data) { return ""; }
 }
