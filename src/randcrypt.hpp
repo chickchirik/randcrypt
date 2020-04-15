@@ -23,8 +23,8 @@
 #include "nlohmann/json.hpp"    /* nlohmann::json*/
 
 namespace randcrypt {
-    std::string encode(std::string filepathIn, std::string filepathOut);
-    std::string encode(std::string data);
-    std::string decode(std::string filepathIn, std::string filepathOut, std::string decodeInfo);
-    std::string decode(std::string data);
+    std::string encode(const std::string& filepathIn, const std::string& filepathOut);
+    std::string encode(const std::string& data);
+    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo);
+    std::string decode(const std::string& data);
 }

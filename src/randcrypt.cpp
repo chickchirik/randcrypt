@@ -23,10 +23,10 @@ namespace {
          *  name, key, iv,
          *  id(tmp solution for inner-indexing, thinking about better one)
          */
-        std::function<string(string fileptahIn, string filepathOut)> encodeFile;
-        std::function<string(string data)> encodeData;
-        std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeFile;
-        std::function<string(string algoSeries)> decodeData;
+        std::function<string(const string& fileptahIn, const string& filepathOut)> encodeFile;
+        std::function<string(const string& data)> encodeData;
+        std::function<string(const string& fileptahIn, const string& filepathOut, const string& decodeInfo)> decodeFile;
+        std::function<string(const string& algoSeries)> decodeData;
         std::function<void()> genKeyWithIV;
         string name = "";
         CryptoPP::SecByteBlock key;
@@ -35,10 +35,10 @@ namespace {
 
         AlgorithmInfo() {} //temporary empty constructor, will be prohibited later
         AlgorithmInfo(
-            std::function<string(string fileptahIn, string filepathOut)> encodeF,
-            std::function<string(string data)> encodeD,
-            std::function<string(string fileptahIn, string filepathOut, string decodeInfo)> decodeF,
-            std::function<string(string data)> decodeD,
+            std::function<string(const string& fileptahIn, const string& filepathOut)> encodeF,
+            std::function<string(const string& data)> encodeD,
+            std::function<string(const string& fileptahIn, const string& filepathOut, const string& decodeInfo)> decodeF,
+            std::function<string(const string& data)> decodeD,
             std::function<void()> genKeyWithIV,
             string algoName
         ) : encodeFile(encodeF), encodeData(encodeD),
@@ -91,8 +91,8 @@ namespace {
 }
 
 namespace randcrypt {
-    std::string encode(std::string filepathIn, std::string filepathOut) {}
-    std::string encode(std::string data) {}
-    std::string decode(std::string filepathIn, std::string filepathOut, std::string decodeInfo) {}
-    std::string decode(std::string data) {}
+    std::string encode(const std::string& filepathIn, const std::string& filepathOut) {}
+    std::string encode(const std::string& data) {}
+    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo) {}
+    std::string decode(const std::string& data) {}
 }
