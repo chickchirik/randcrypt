@@ -45,7 +45,7 @@ namespace {
     };
 
     /* algorithm-info lookup table */
-    const vector<AlgorithmInfo*> algorithms;
+    vector<AlgorithmInfo*> algorithms;
 
     vector<AlgorithmInfo*> formAlgoSeries() {
         /* creates an arbitary sequence of
@@ -70,6 +70,19 @@ namespace {
 }
 
 namespace randcrypt {
+
+    bool initialize() {
+        algorithms.push_back(new AESInfo());
+        return true;
+    }
+
+    bool terminate() {
+        for (const auto algo : algorithms) {
+            delete algo;
+        }
+        return true;
+    }
+
     std::string encode(const std::string& filepathIn, const std::string& filepathOut) { return ""; }
     std::string encode(const std::string& data) { return ""; }
     std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo) { return ""; }

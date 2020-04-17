@@ -21,6 +21,8 @@
 #include <random>               /* std::uniform_int_distribution; std::mersenne_twister_generator; */
 
 namespace randcrypt {
+    bool initialize();
+    bool terminate();
     std::string encode(const std::string& filepathIn, const std::string& filepathOut);
     std::string encode(const std::string& data);
     std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo);
