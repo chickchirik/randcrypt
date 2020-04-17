@@ -5,6 +5,8 @@
 */
 #include "randcrypt.hpp"
 
+#include <iostream>
+
 /* unknown namespace for static-like linker visibility reduction behaviour */
 namespace {
     template <typename IntT>
@@ -29,12 +31,12 @@ namespace {
         virtual void   genKeyWithIV() = 0;
     };
 
-    class AESInfo : AlgorithmInfo {
+    class AESInfo : public AlgorithmInfo {
     public:
-        virtual string encode(const string& data) override {}
-        virtual string decode(const string& algoSeries) override {}
-        virtual string encode(const string& fileptahIn, const string& filepathOut) override {}
-        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) override {}
+        virtual string encode(const string& data) override { return ""; }
+        virtual string decode(const string& algoSeries) override { return ""; }
+        virtual string encode(const string& fileptahIn, const string& filepathOut) override { return ""; }
+        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) override { return ""; }
         virtual void   genKeyWithIV() override {}
     };
 
