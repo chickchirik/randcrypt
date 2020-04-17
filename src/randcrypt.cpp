@@ -22,7 +22,8 @@ namespace {
         CryptoPP::SecByteBlock iv;
         int id =  0;
     public:
-        AlgorithmInfo() {} //temporary empty constructor, will be prohibited later
+        AlgorithmInfo()  = default;
+        ~AlgorithmInfo() = default;
 
         virtual string encode(const string& data) = 0;
         virtual string decode(const string& algoSeries) = 0;
@@ -33,6 +34,9 @@ namespace {
 
     class AESInfo : public AlgorithmInfo {
     public:
+        AESInfo()  = default;
+        ~AESInfo() = default;
+
         virtual string encode(const string& data) override { return ""; }
         virtual string decode(const string& algoSeries) override { return ""; }
         virtual string encode(const string& fileptahIn, const string& filepathOut) override { return ""; }
