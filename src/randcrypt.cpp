@@ -13,7 +13,6 @@ namespace {
     using RanGen = std::mt19937;
     using std::string;
     using std::vector;
-    using nlohmann::json;
 
     class AlgorithmInfo {
     protected:
@@ -28,15 +27,6 @@ namespace {
         virtual string encode(const string& fileptahIn, const string& filepathOut) = 0;
         virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) = 0;
         virtual void   genKeyWithIV() = 0;
-
-        /* returns a json, containing struct data */
-        operator json () const {
-            json result;
-            result["key"]  = std::string(reinterpret_cast<const char*>(&key[0]), key.size());
-            result["iv"]   = std::string(reinterpret_cast<const char*>(&iv[0]), iv.size());
-            result["id"]   = id;
-            return result;
-        }
     };
 
     class AESInfo : AlgorithmInfo {
@@ -70,15 +60,6 @@ namespace {
             algoSeries.push_back(currAlgo);
         }
         return algoSeries;
-    }
-
-    json convertToJSON(vector<AlgorithmInfo*> algos) {
-        /* converts algoseries to json */
-        json result;
-        for (const auto* algo : algos) {
-            result["series"] += *algo;
-        }
-        return result;
     }
 }
 

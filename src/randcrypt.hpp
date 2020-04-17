@@ -16,11 +16,9 @@
 #pragma once
 #include "cryptopp/cryptlib.h"
 #include "cryptopp/secblock.h"
-#include "cryptopp/rsa.h"
 #include <functional>           /* std::function */
 #include <string>               /* std::string   */
 #include <random>               /* std::uniform_int_distribution; std::mersenne_twister_generator; */
-#include "nlohmann/json.hpp"    /* nlohmann::json*/
 
 namespace randcrypt {
     std::string encode(const std::string& filepathIn, const std::string& filepathOut);
