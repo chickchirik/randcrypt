@@ -47,7 +47,13 @@ namespace {
         virtual string decode(const string& algoSeries) override { return ""; }
         virtual string encode(const string& fileptahIn, const string& filepathOut) override { return ""; }
         virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) override { return ""; }
-        virtual void   genKeyWithIV() override {}
+        virtual void   genKeyWithIV() override {
+            CryptoPP::AutoSeededRandomPool rnd;
+            key = CryptoPP::SecByteBlock(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
+            iv = CryptoPP::SecByteBlock(CryptoPP::AES::BLOCKSIZE);
+            rnd.GenerateBlock(key, key.size());
+            rnd.GenerateBlock(iv, iv.size());
+        }
     };
 
     /* algorithm-info lookup table */
