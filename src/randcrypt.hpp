@@ -15,7 +15,9 @@
 */
 #pragma once
 #include "cryptopp/cryptlib.h"
-#include "cryptopp/secblock.h"
+#include "cryptopp/secblock.h"  /* SecByteBlock         */
+#include "cryptopp/filters.h"   /* StringSource         */
+#include "cryptopp/osrng.h"     /* AutoSeededRandomPool */
 #include <functional>           /* std::function */
 #include <string>               /* std::string   */
 #include <vector>               /* std::vector   */
