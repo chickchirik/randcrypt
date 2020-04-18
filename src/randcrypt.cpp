@@ -25,6 +25,12 @@ namespace {
         AlgorithmInfo()  = default;
         ~AlgorithmInfo() = default;
 
+        CryptoPP::SecByteBlock getKey() { return key; }
+        CryptoPP::SecByteBlock getIV()  { return iv;  }
+        string getKeyAsString() { return string(reinterpret_cast<const char*>(&key[0]), key.size()); }
+        string getIVAsString()  { return string(reinterpret_cast<const char*>(&iv[0]),  key.size()); }
+        int    getID() { return id; }
+
         virtual string encode(const string& data) = 0;
         virtual string decode(const string& algoSeries) = 0;
         virtual string encode(const string& fileptahIn, const string& filepathOut) = 0;
