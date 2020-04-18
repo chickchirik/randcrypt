@@ -83,8 +83,14 @@ namespace randcrypt {
         return true;
     }
 
-    std::string encode(const std::string& filepathIn, const std::string& filepathOut) { return ""; }
-    std::string encode(const std::string& data) { return ""; }
-    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo) { return ""; }
-    std::string decode(const std::string& data) { return ""; }
+    std::vector<std::string> encode(const std::string& filepathIn, const std::string& filepathOut) {
+        std::vector<std::string> decodeInfo = {"count", "key", "iv", "id"};
+        return decodeInfo;
+    }
+    std::vector<std::string> encode(const std::string& data) {
+        std::vector<std::string> decodeInfo = {"count", "key", "iv", "id"};
+        return decodeInfo;
+    }
+    void decode(const std::string& filepathIn, const std::string& filepathOut, const std::vector<std::string>& decodeInfo) {}
+    std::string decode(const std::vector<std::string>& decodeInfo) { return ""; }
 }

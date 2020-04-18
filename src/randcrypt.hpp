@@ -18,13 +18,14 @@
 #include "cryptopp/secblock.h"
 #include <functional>           /* std::function */
 #include <string>               /* std::string   */
+#include <vector>               /* std::vector   */
 #include <random>               /* std::uniform_int_distribution; std::mersenne_twister_generator; */
 
 namespace randcrypt {
     bool initialize();
     bool terminate();
-    std::string encode(const std::string& filepathIn, const std::string& filepathOut);
-    std::string encode(const std::string& data);
-    std::string decode(const std::string& filepathIn, const std::string& filepathOut, const std::string& decodeInfo);
-    std::string decode(const std::string& data);
+    std::vector<std::string> encode(const std::string& filepathIn, const std::string& filepathOut);
+    std::vector<std::string> encode(const std::string& data);
+    void decode(const std::string& filepathIn, const std::string& filepathOut, const std::vector<std::string>& decodeInfo);
+    std::string decode(const std::vector<std::string>& decodeInfo);
 }
