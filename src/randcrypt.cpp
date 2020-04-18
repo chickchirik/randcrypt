@@ -53,13 +53,11 @@ namespace {
          * one algorithm included
          */
         vector<AlgorithmInfo*> algoSeries;
-        UIDistr<int> algoIdDistr(0, algorithms.size() - 1);
-        UIDistr<int> lenDistr(1, algorithms.size());
-        RanDev randomDevice;
-        RanGen generator(randomDevice());
-        int seriesLen = lenDistr(generator);
+        CryptoPP::AutoSeededRandomPool rnd;
+        int seriesLen = rnd.GenerateWord32(1, algorithms.size());
+
         for (int algoNum = 1; algoNum <= seriesLen; ++algoNum) {
-            int algoID = algoIdDistr(generator);
+            int algoID = rnd.GenerateWord32(0, algorithms.size() - 1);
             AlgorithmInfo* currAlgo = algorithms[algoID];
             //currAlgo.id = algoID;
             currAlgo->genKeyWithIV();
