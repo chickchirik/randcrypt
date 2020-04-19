@@ -10,9 +10,6 @@
 /* unknown namespace for static-like linker visibility reduction behaviour */
 namespace {
     template <typename IntT>
-    using UIDistr = std::uniform_int_distribution<IntT>;
-    using RanDev = std::random_device;
-    using RanGen = std::mt19937;
     using std::string;
     using std::vector;
 
