@@ -9,7 +9,6 @@
 
 /* unknown namespace for static-like linker visibility reduction behaviour */
 namespace {
-    template <typename IntT>
     using std::string;
     using std::vector;
 
