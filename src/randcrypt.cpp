@@ -40,7 +40,17 @@ namespace {
         AESInfo()  = default;
         ~AESInfo() = default;
 
-        virtual string  encode(const string& data) override { return ""; }
+        virtual string  encode(const string& data) override {
+            CryptoPP::CTR_Mode<CryptoPP::AES>::Encryption encryptor(key, key.size(), iv);
+            string cipher = "";
+            CryptoPP::StringSource(
+                data, true,
+                new CryptoPP::StreamTransformationFilter(
+                    encryptor, new CryptoPP::StringSink(cipher)
+                )
+            );
+            return cipher;
+        }
         virtual string  decode(const string& data) override { return ""; }
         virtual void    encode(const string& fileptahIn, const string& filepathOut) override {}
         virtual void    decode(const string& fileptahIn, const string& filepathOut) override {}
