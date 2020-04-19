@@ -12,11 +12,12 @@ namespace {
     using std::string;
     using std::vector;
 
+    /* base interface class. new algorithm must derive from it and override virtual functions */
     class AlgorithmInfo {
     protected:
         CryptoPP::SecByteBlock key;
         CryptoPP::SecByteBlock iv;
-        int id =  0;
+        int id = 0;
     public:
         AlgorithmInfo()  = default;
         ~AlgorithmInfo() = default;
@@ -46,13 +47,13 @@ namespace {
         virtual void   genKeyWithIV() override {
             CryptoPP::AutoSeededRandomPool rnd;
             key = CryptoPP::SecByteBlock(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
-            iv = CryptoPP::SecByteBlock(CryptoPP::AES::BLOCKSIZE);
+            iv  = CryptoPP::SecByteBlock(CryptoPP::AES::BLOCKSIZE);
             rnd.GenerateBlock(key, key.size());
             rnd.GenerateBlock(iv, iv.size());
         }
     };
 
-    /* algorithm-info lookup table */
+    /* algorithm-info lookup table. new algorithms should be registered in randcrypt::initialize function */
     vector<AlgorithmInfo*> algorithms;
 
     vector<AlgorithmInfo*> formAlgoSeries() {
@@ -62,10 +63,10 @@ namespace {
          */
         vector<AlgorithmInfo*> algoSeries;
         CryptoPP::AutoSeededRandomPool rnd;
-        int seriesLen = rnd.GenerateWord32(1, algorithms.size());
+        int seriesLen = rnd.GenerateWord32(1, algorithms.size());           /* include at least one algorithm   */
 
         for (int algoNum = 1; algoNum <= seriesLen; ++algoNum) {
-            int algoID = rnd.GenerateWord32(0, algorithms.size() - 1);
+            int algoID = rnd.GenerateWord32(0, algorithms.size() - 1);      /* choose algorithm randomly        */
             AlgorithmInfo* currAlgo = algorithms[algoID];
             //currAlgo.id = algoID;
             currAlgo->genKeyWithIV();
@@ -76,27 +77,47 @@ namespace {
 }
 
 namespace randcrypt {
+    /* randcrypt user API */
 
     bool initialize() {
+        /* register used algorithms */
         algorithms.push_back(new AESInfo());
         return true;
     }
 
     bool terminate() {
+        /* free used memory         */
         for (const auto algo : algorithms) {
             delete algo;
         }
         return true;
     }
 
-    std::vector<std::string> encode(const std::string& filepathIn, const std::string& filepathOut) {
+    std::vector<std::string> encode(
+            const std::string& filepathIn,
+            const std::string& filepathOut
+    ) {
+        /* encodes file using randomly generated algorihm sequence  */
         std::vector<std::string> decodeInfo = {"count", "key", "iv", "id"};
         return decodeInfo;
     }
+
     std::vector<std::string> encode(const std::string& data) {
+        /* encodes data using randomly generated algorihm sequence  */
         std::vector<std::string> decodeInfo = {"count", "key", "iv", "id"};
         return decodeInfo;
     }
-    void decode(const std::string& filepathIn, const std::string& filepathOut, const std::vector<std::string>& decodeInfo) {}
-    std::string decode(const std::vector<std::string>& decodeInfo) { return ""; }
+
+    void decode(
+        const std::string& filepathIn,
+        const std::string& filepathOut,
+        const std::vector<std::string>& decodeInfo
+    ) {
+        /* decodes file using decodeInfo    */
+    }
+
+    std::string decode(const std::vector<std::string>& decodeInfo) {
+        /* decodes data using decodeInfo    */
+        return "";
+    }
 }

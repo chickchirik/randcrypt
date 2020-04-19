@@ -3,30 +3,46 @@
  * Created by <chickchirik> on 03/04/2019.
  * DESCRIPTION:
  *  randcrypt is an ecryption/decryption software
- *  that uses random algorithms. It is based on a
- *  cryptopp library and provides a some kind of
+ *  that uses random algorithm seqences. It is based
+ *  on a cryptopp library and provides a some kind of
  *  wrapper. Current API offers four functions:
  *      encode (for files and for raw data) - randomly chooses
  *              encryption algorithms and encodes the file or raw
- *              data returning a hashed information about which
- *              algorithms and in what order were used.
+ *              data returning an information about which
+ *              algorithms and in what order were used, including
+                such info as key and initialization vector.
  *      decode (for files and for raw data) - decodes the information
- *      back based on a hash returned from previous function.
+ *      back based on an information returned from previous function.
 */
 #pragma once
 #include "cryptopp/cryptlib.h"
-#include "cryptopp/secblock.h"  /* SecByteBlock         */
-#include "cryptopp/filters.h"   /* StringSource         */
-#include "cryptopp/osrng.h"     /* AutoSeededRandomPool */
-#include <functional>           /* std::function */
-#include <string>               /* std::string   */
-#include <vector>               /* std::vector   */
+#include "cryptopp/secblock.h"  /* SecByteBlock             */
+#include "cryptopp/filters.h"   /* StringSource             */
+#include "cryptopp/osrng.h"     /* AutoSeededRandomPool     */
+#include <string>               /* std::string              */
+#include <vector>               /* std::vector              */
 
 namespace randcrypt {
-    bool initialize();
-    bool terminate();
-    std::vector<std::string> encode(const std::string& filepathIn, const std::string& filepathOut);
+    /* randcrypt user API */
+    bool initialize();  /* register used algorithms */
+    bool terminate();   /* free used memory         */
+
+    /* encodes file using randomly generated algorihm sequence  */
+    std::vector<std::string> encode(
+        const std::string& filepathIn,
+        const std::string& filepathOut
+    );
+
+    /* encodes data using randomly generated algorihm sequence  */
     std::vector<std::string> encode(const std::string& data);
-    void decode(const std::string& filepathIn, const std::string& filepathOut, const std::vector<std::string>& decodeInfo);
+
+    /* decodes file using decodeInfo    */
+    void decode(
+        const std::string& filepathIn,
+        const std::string& filepathOut,
+        const std::vector<std::string>& decodeInfo
+    );
+
+    /* decodes data using decodeInfo    */
     std::string decode(const std::vector<std::string>& decodeInfo);
 }
