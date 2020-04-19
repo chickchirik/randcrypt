@@ -28,11 +28,11 @@ namespace {
         string getIVAsString()  { return string(reinterpret_cast<const char*>(&iv[0]),  key.size()); }
         int    getID() { return id; }
 
-        virtual string encode(const string& data) = 0;
-        virtual string decode(const string& algoSeries) = 0;
-        virtual string encode(const string& fileptahIn, const string& filepathOut) = 0;
-        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) = 0;
-        virtual void   genKeyWithIV() = 0;
+        virtual string  encode(const string& data) = 0;
+        virtual string  decode(const string& data) = 0;
+        virtual void    encode(const string& fileptahIn, const string& filepathOut) = 0;
+        virtual void    decode(const string& fileptahIn, const string& filepathOut) = 0;
+        virtual void    genKeyWithIV() = 0;
     };
 
     class AESInfo : public AlgorithmInfo {
@@ -40,11 +40,11 @@ namespace {
         AESInfo()  = default;
         ~AESInfo() = default;
 
-        virtual string encode(const string& data) override { return ""; }
-        virtual string decode(const string& algoSeries) override { return ""; }
-        virtual string encode(const string& fileptahIn, const string& filepathOut) override { return ""; }
-        virtual string decode(const string& fileptahIn, const string& filepathOut, const string& decodeInfo) override { return ""; }
-        virtual void   genKeyWithIV() override {
+        virtual string  encode(const string& data) override { return ""; }
+        virtual string  decode(const string& data) override { return ""; }
+        virtual void    encode(const string& fileptahIn, const string& filepathOut) override {}
+        virtual void    decode(const string& fileptahIn, const string& filepathOut) override {}
+        virtual void    genKeyWithIV() override {
             CryptoPP::AutoSeededRandomPool rnd;
             key = CryptoPP::SecByteBlock(0x00, CryptoPP::AES::DEFAULT_KEYLENGTH);
             iv  = CryptoPP::SecByteBlock(CryptoPP::AES::BLOCKSIZE);
