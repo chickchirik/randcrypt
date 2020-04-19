@@ -114,7 +114,16 @@ namespace randcrypt {
 
     std::vector<std::string> encode(const std::string& data) {
         /* encodes data using randomly generated algorihm sequence  */
-        std::vector<std::string> decodeInfo = {"count", "key", "iv", "id"};
+        auto algoSeries = formAlgoSeries();
+        std::vector<std::string> decodeInfo = {std::to_string(algoSeries.size())};
+        std::string cipher = data;
+        for (const auto algo : algoSeries) {
+            cipher = algo->encode(cipher);
+            decodeInfo.push_back(algo->getKeyAsString());
+            decodeInfo.push_back(algo->getIVAsString());
+            decodeInfo.push_back(std::to_string(algo->getID()));
+        }
+        decodeInfo.push_back(cipher);
         return decodeInfo;
     }
 
