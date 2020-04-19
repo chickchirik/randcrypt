@@ -38,7 +38,6 @@ $ ./bin/t
 
 ### links
 
-- Nlohmann::JSON: https://cryptopp.com/
 - Crypto++:       https://cryptopp.com/
 - Conan:          https://conan.io/
 - CMake:          https://cmake.org/
