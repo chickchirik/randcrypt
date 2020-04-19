@@ -22,11 +22,11 @@ namespace {
         AlgorithmInfo()  = default;
         ~AlgorithmInfo() = default;
 
-        CryptoPP::SecByteBlock getKey() { return key; }
-        CryptoPP::SecByteBlock getIV()  { return iv;  }
-        string getKeyAsString() { return string(reinterpret_cast<const char*>(&key[0]), key.size()); }
-        string getIVAsString()  { return string(reinterpret_cast<const char*>(&iv[0]),  key.size()); }
-        int    getID() { return id; }
+        CryptoPP::SecByteBlock getKey() const { return key; }
+        CryptoPP::SecByteBlock getIV()  const { return iv;  }
+        string getKeyAsString() const { return string(reinterpret_cast<const char*>(&key[0]), key.size()); }
+        string getIVAsString()  const { return string(reinterpret_cast<const char*>(&iv[0]),  key.size()); }
+        int    getID() const { return id; }
 
         virtual string  encode(const string& data) = 0;
         virtual string  decode(const string& data) = 0;
