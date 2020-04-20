@@ -153,6 +153,16 @@ namespace randcrypt {
 
     std::string decode(const std::vector<std::string>& decodeInfo) {
         /* decodes data using decodeInfo    */
-        return "";
+        std::string decodedData = decodeInfo.back();
+        for (int it = 1; it != decodeInfo.size() - 1;) {
+            auto key = decodeInfo[it++];
+            auto iv  = decodeInfo[it++];
+            int algoID = stoi(decodeInfo[it++]);
+            AlgorithmInfo* algo = algorithms[algoID];
+            algo->setKey(key);
+            algo->setIV(iv);
+            decodedData = algo->decode(decodedData);
+        }
+        return decodedData;
     }
 }
