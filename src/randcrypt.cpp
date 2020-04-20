@@ -28,6 +28,11 @@ namespace {
         string getIVAsString()  const { return string(reinterpret_cast<const char*>(&iv[0]),  key.size()); }
         int    getID() const { return id; }
 
+        void setKey(const string& newKey) { key = CryptoPP::SecByteBlock(reinterpret_cast<const CryptoPP::byte*>(&newKey[0]), key.size()); }
+        void setIV(const string& newIV)   { iv  = CryptoPP::SecByteBlock(reinterpret_cast<const CryptoPP::byte*>(&newIV[0]),  key.size()); }
+        void setKey(const CryptoPP::SecByteBlock& newKey) { key = newKey; }
+        void setIV(const CryptoPP::SecByteBlock& newIV)   { iv  = newIV;  }
+
         virtual string  encode(const string& data) = 0;
         virtual string  decode(const string& data) = 0;
         virtual void    encode(const string& fileptahIn, const string& filepathOut) = 0;
