@@ -56,7 +56,17 @@ namespace {
             );
             return cipher;
         }
-        virtual string  decode(const string& data) override { return ""; }
+        virtual string  decode(const string& data) override {
+            CryptoPP::CTR_Mode<CryptoPP::AES>::Decryption decryptor(key, key.size(), iv);
+            string decodedData = "";
+            CryptoPP::StringSource(
+                data, true,
+                new CryptoPP::StreamTransformationFilter(
+                    decryptor, new CryptoPP::StringSink(decodedData)
+                )
+            );
+            return decodedData;
+        }
         virtual void    encode(const string& fileptahIn, const string& filepathOut) override {}
         virtual void    decode(const string& fileptahIn, const string& filepathOut) override {}
         virtual void    genKeyWithIV() override {
